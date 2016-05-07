@@ -1,0 +1,10 @@
+{% extends 'Index.html' %}
+{% block top_title %}Обо мне{% endblock %}
+{% block content %}
+    <h1>Обо мне</h1>
+    <p>Всего несколько слов. Доступ к переменным файла config:</p>
+    <ol>
+        <li>{{ toptitle }}, </li>
+        <li>{{ app.config.toptitle }}.</li>
+    </ol>
+{% endblock %}

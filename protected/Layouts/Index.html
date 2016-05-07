@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block top_title %}{{app.config.toptitle}}{% endblock %}</title>
+  {{ publishCss() }}
+</head>
+<body>
+  {% block content %}{% endblock %}
+  {{ publishJs() }}
+</body>
+</html>

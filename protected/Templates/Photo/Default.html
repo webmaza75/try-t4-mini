@@ -1,0 +1,10 @@
+{% extends 'Index.html' %}
+{% set alt = 'Фотографии' %}
+{% block top_title %}{{ alt }}{% endblock %}
+{% block content %}
+    <h1>{{alt}}</h1>
+    {% for i in 1..10 %}
+        <img src="http://placehold.it/150x150" alt="{{ alt }}: {{ i }}" title="{{ alt }}: {{ i }}">
+    {% endfor %}
+
+{% endblock %}
