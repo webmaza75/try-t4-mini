@@ -1,0 +1,20 @@
+<article>
+    <header>
+        <h2>{% if article.title is empty  %}
+                Без названия
+            {% else %}
+                {{ article.title }}
+            {% endif %}
+            </h2>
+    </header>
+
+    {% if not article.image is empty %}
+        <figure>
+            <img src="{{article.image}}">
+        </figure>
+    {% endif %}
+
+    <section>
+        {{ article.text }}
+    </section>
+</article>

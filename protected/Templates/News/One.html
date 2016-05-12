@@ -1,0 +1,6 @@
+{% extends 'Index.html' %}
+{% block top_title %}{{ article.title }}{% endblock %}
+{% block content %}
+    {% include 'Article.html' %}
+<a href="/news">К списку новостей</a>
+{% endblock %}
