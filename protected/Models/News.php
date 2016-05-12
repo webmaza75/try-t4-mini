@@ -17,13 +17,13 @@ class News extends Config
 
     public function findOne(int $id)
     {
-        $arrNews = [];
+        $arrArticle = [];
         foreach ($this->news as $i => $v) {
             if ($i == $id) {
-                return $arrNews[$i] = new Article($v->toArray());
+                return $arrNews = new Article($v->toArray());
             }
         }
-        return $arrNews;
+        return $arrArticle;
     }
 
     public function getLast()
