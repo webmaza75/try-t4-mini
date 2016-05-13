@@ -17,12 +17,7 @@ class News extends Config
 
     public function findOne(int $id)
     {
-        foreach ($this->news as $i => $v) {
-            if ($i == $id) {
-                return new Article($v->toArray());
-            }
-        }
-        return null;
+        return $this->findAll()[$id];
     }
 
     public function getLast()
