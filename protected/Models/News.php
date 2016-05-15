@@ -2,26 +2,23 @@
 
 namespace App\Models;
 
-use T4\Core\Config;
+use T4\Orm\Model;
 
-class News extends Config
+/**
+ * Class News
+ * Имя и схема таблицы
+ *
+ * @package App\Models
+ */
+class News extends Model
 {
-    public function findAll()
-    {
-        $arrNews = [];
-        foreach ($this->news as $i => $v) {
-            $arrNews[$i] = new Article($v->toArray());
-        }
-        return $arrNews;
-    }
-
-    public function findOne(int $id)
-    {
-        return $this->findAll()[$id];
-    }
-
-    public function getLast()
-    {
-        return (end($this->news->toArray()));
-    }
+    static protected $schema = [
+        'table' => 'news',
+        'columns' => [
+            'title' => ['type' => 'string'],
+            'text' => ['type' => 'text'],
+            'pubday' => ['type' => 'date'],
+            'image' => ['type' => 'string'],
+        ],
+    ];
 }

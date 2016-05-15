@@ -7,52 +7,77 @@ use T4\Http\Uploader;
 use App\Models\Article;
 use App\Models\News as MNews;
 
+/**
+ * Class News класс новостей
+ * @package App\Controllers
+ */
 class News extends Controller
 {
     public function actionDefault()
     {
-        $news = new MNews(ROOT_PATH_PROTECTED . '\news.php');
-        $this->data->news = $news->findAll();
+        $this->data->news = MNews::findAll();
     }
 
     public function actionOne(int $id = 0)
     {
-        $article = new MNews(ROOT_PATH_PROTECTED . '\news.php');
-        $this->data->article = $article->findOne($id);
+        $this->data->article = MNews::findByPK($id);
     }
 
     public function actionLast()
     {
-        $article = new MNews(ROOT_PATH_PROTECTED . '\news.php');
-        $this->data->article = $article->getLast();
+        $this->data->article = MNews::find(['order' => '__id DESC']);
     }
 
-    public function actionAdd($title = null, $text = null, $image = null)
+    public function actionAdd($__id = null, $title = null, $text = null, $pubday = null, $image = null)
     {
         if (!empty($text)) {
             $request = $this->app->request;
+            // Загрузка изображения на сервер
             if ($request->isUploaded('image')) {
                 $uploader = new Uploader('image',
                     ['jpg', 'jpeg', 'png', 'gif']);
                 $uploader->setPath('/images');
                 $image = $uploader();
             }
-            $article = new Article([
-                'title' => trim($title),
-                'text' => trim($text),
-                'image' => empty($image) ? '' : $image,
-            ]);
-            $this->add($article);
 
-            header('Location: /news');
-            exit;
+            // Добавление свежей новости
+            if (empty($__id)) {
+                $article = new Article([
+                    'title' => trim($title),
+                    'text' => trim($text),
+                    'pubday' => empty($pubday) ? null : $pubday,
+                    'image' => empty($image) ? '' : $image,
+                ]);
+                $this->add($article);
+
+            // Редактирование имеющейся новости
+            } else {
+                $article = MNews::findByPK($__id);
+                $article->title = trim($title);
+                $article->text = trim($text);
+                $article->pubday = empty($pubday) ? null : $pubday;
+                $article->image = empty($image) ? '' : $image;
+                $article->save();
+            }
+
+            $this->redirect('/news');
         }
     }
 
-    function add(Article $data)
+    protected function add(Article $data)
     {
-        $article = new MNews(ROOT_PATH_PROTECTED . '\news.php');
-        $article->news[] = $data;
+        $article = new MNews($data->toArray());
         $article->save();
+    }
+
+    public function actionDelete(int $id)
+    {
+        MNews::findByPK($id)->delete();
+        $this->redirect('/news');
+    }
+
+    public function actionEdit($id)
+    {
+        $this->data->article = MNews::findByPK($id);
     }
 }

@@ -1,0 +1,27 @@
+{% extends 'Index.html' %}
+{% block top_title %}Редактировать новость{% endblock %}
+{% block content %}
+<div class="container">
+    <form method="post" action="/news/add" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="title">Заголовок новости</label>
+            <input type="text" class="form-control" id="title" name="title" value="{{article.title}}" placeholder="Заголовок новости">
+        </div>
+        <div class="form-group">
+            <label for="pubday">Дата публикации</label>
+            <input type="date" class="form-control" id="pubday" value="{{article.pubday}}" name="pubday">
+        </div>
+        <div class="form-group">
+            <label for="text">Содержание новости</label>
+            <textarea class="form-control" id="text" name="text" placeholder="Содержание новости" required>{{article.text}}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="image">Выберите изображение</label>
+            <input type="file" id="image" name="image">{{article.image}}
+        </div>
+        <input type="hidden" name="__id" value="{{article.__id}}">
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>
+<a href="/news">К списку новостей</a>
+{% endblock %}
