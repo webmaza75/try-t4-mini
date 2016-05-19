@@ -4,9 +4,9 @@
 
 <h1>Товары категории "{{cats.maincat.title}}"</h1>
 
-    {% if cats | length %}
+    {% if cats %}
         <table class="table table-striped">
-            {% if cats.maincat.products | length %}
+            {% if not cats.maincat.products is empty %}
                 <tr>
                     <th width="70%" class="lead">{{cats.maincat.title}}</th><th>Цена</th><th>В наличии</th>
                 </tr>
