@@ -1,0 +1,14 @@
+{% extends 'Index.html' %}
+{% block top_title %}Категории{% endblock %}
+{% block content %}
+<form class="form form-horizontal" action="/admin/category/save" method="post">
+    <input type="text" id="title" name="category[title]" required>
+    <select name="category[parent]">
+        {% for cat in cats %}
+            <option value="{{cat.__id}}">{{cat.title}}</option>
+        {% endfor %}
+    </select>
+    <input class="btn btn-sm btn-success" type="submit" value="Сохранить">
+</form>
+<a href="/admin/category">К категориям</a>
+{% endblock %}

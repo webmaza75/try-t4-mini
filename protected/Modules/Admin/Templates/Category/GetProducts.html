@@ -1,0 +1,42 @@
+{% extends 'Index.html' %}
+{% block top_title %}Товары категории "{{cats.maincat.title}}"{% endblock %}
+{% block content %}
+
+<h1>Товары категории "{{cats.maincat.title}}"</h1>
+
+    {% if cats | length %}
+        <table class="table table-striped">
+            {% if cats.maincat.products | length %}
+                <tr>
+                    <th width="70%" class="lead">{{cats.maincat.title}}</th><th>Цена</th><th>В наличии</th>
+                </tr>
+                {% for product in cats.maincat.products %}
+                    <tr>
+                        <td>{{product.title}}</td>
+                        <td>{{product.price}}</td>
+                        <td>{% if product.stock is empty %}нет{% else %}да{% endif %}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+
+            {% for cat in cats %}
+                {% if cat.products | length %}
+                    <tr>
+                        <th width="70%" class="lead">{{cat.title}}</th><th>Цена</th><th>В наличии</th>
+                    </tr>
+
+                    {% for product in cat.products %}
+                        <tr>
+                            <td>{{product.title}}</td>
+                            <td>{{product.price}}</td>
+                            <td>{% if product.stock is empty %}нет{% else %}да{% endif %}</td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>В категории {{cats.maincat.title}} пока нет товаров</p>
+    {% endif %}
+<a href="/admin/category">К категориям</a>
+{% endblock %}
