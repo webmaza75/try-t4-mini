@@ -4,7 +4,8 @@
 
 <h1>Товары категории "{{cats.maincat.title}}"</h1>
 
-    {% if cats %}
+    {% if (cats.maincat.products or cats[0].products) | length %}
+
         <table class="table table-striped">
             {% if not cats.maincat.products is empty %}
                 <tr>
@@ -35,7 +36,8 @@
                 {% endif %}
             {% endfor %}
         </table>
-    {% else %}
+    {% endif %}
+    {% if (cats.maincat.products and cats[0].products) is empty %}
         <p>В категории {{cats.maincat.title}} пока нет товаров</p>
     {% endif %}
 <a href="/admin/category">К категориям</a>
