@@ -4,6 +4,12 @@ namespace App\Models;
 
 use T4\Orm\Model;
 
+/**
+ * Class Product
+ * Схема для сущности Продукты (products)
+ * Тип связи: товар принадлежит категории (self::BELONGS_TO)
+ * @package App\Models
+ */
 class Product extends Model
 {
     static protected $schema = [

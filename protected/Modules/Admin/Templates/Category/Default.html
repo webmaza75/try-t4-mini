@@ -5,16 +5,15 @@
     <p></p>
     <table class="table table-striped">
         <tr>
-            <th width="70%">Категория</th><th>Товары</th><th>Действия</th><th>Вверх</th><th>Вниз</th>
+            <th width="70%">Категория</th><th>Действия</th><th>Вверх</th><th>Вниз</th>
         </tr>
         {% for cat in cats %}
-        <tr>
-            <td>{% if cat.__lvl == 0 %}{{cat.title}}{% elseif cat.__lvl == 1 %}- {{cat.title}}{% elseif cat.__lvl == 2 %}-- {{cat.title}}{% else %}--- {{cat.title}}{% endif %}</td>
-            <td><a class="btn btn-success btn-sm" href="/admin/category/getproducts?id={{cat.Pk}}">Показать</a></td>
-            <td><a class="btn btn-danger btn-sm" href="/admin/category/delete?id={{cat.Pk}}">Удалить</a></td>
-            <td><a class="btn btn-primary btn-sm" href="/admin/category/up?id={{cat.Pk}}">Вверх</a></td>
-            <td><a class="btn btn-primary btn-sm" href="/admin/category/down?id={{cat.Pk}}">Вниз</a></td>
-        </tr>
+            <tr>
+                <td>{% if cat.__lvl == 0 %}{{cat.title}}{% elseif cat.__lvl == 1 %}- {{cat.title}}{% elseif cat.__lvl == 2 %}-- {{cat.title}}{% else %}--- {{cat.title}}{% endif %}</td>
+                <td><a class="btn btn-danger btn-sm" href="/admin/category/delete?id={{cat.Pk}}">Удалить</a></td>
+                <td><a class="btn btn-primary btn-sm" href="/admin/category/up?id={{cat.Pk}}">Вверх</a></td>
+                <td><a class="btn btn-primary btn-sm" href="/admin/category/down?id={{cat.Pk}}">Вниз</a></td>
+            </tr>
         {% endfor %}
     </table>
 

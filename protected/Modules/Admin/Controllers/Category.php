@@ -5,6 +5,10 @@ namespace App\Modules\Admin\Controllers;
 use T4\Mvc\Controller;
 use App\Models\Category as MCategory;
 
+/**
+ * Class Category - категории товаров
+ * @package App\Modules\Admin\Controllers
+ */
 class Category extends Controller
 {
     public function actionDefault()
@@ -57,13 +61,5 @@ class Category extends Controller
             $cat->insertAfter($sibling);
         }
         $this->redirect('/admin/category');
-    }
-
-    public function actionGetProducts($id)
-    {
-        $cat = MCategory::findByPK($id);
-        $cats = $cat->findAllChildren();
-        $this->data->cats = $cats;
-        $this->data->cats->maincat = $cat;
     }
 }

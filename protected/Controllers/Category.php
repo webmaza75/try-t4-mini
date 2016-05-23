@@ -2,34 +2,22 @@
 
 namespace App\Controllers;
 
-//use T4\Core\Config;
-use T4\Mvc\Controller;
 use App\Models\Category as MCategory;
+use T4\Mvc\Controller;
 
-class Index
-    extends Controller
+class Category extends Controller
 {
-
     public function actionDefault()
     {
-        /** Запуск кода для сохранения значений в файл конфига
-        $config = new Config(ROOT_PATH_PROTECTED . '/config.php');
-        $config->toptitle = 'Моя первая работа с фреймворком T4';
-        $config->extensions = ['bootstrap' => ['theme' => 'cosmo']];
-        $config->save();
-        */
-    }
-
-    public function actionAbout()
-    {
-        $this->data->toptitle = $this->app->config->toptitle;
+        // Показать все категории товаров
+        $this->data->cats = MCategory::findAllTree();
     }
 
     /**
      * Вывод всех товаров категории с конкретным $id, сгруппированных по подкатегориям
      * @param $id
      */
-    public function actionGetProducts($id)
+    public function actionProducts($id)
     {
         $cat = MCategory::findByPK($id);
         $cats = $cat->findAllChildren(); // для подкатегорий выбранной категории

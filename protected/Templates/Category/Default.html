@@ -1,0 +1,16 @@
+{% extends 'Index.html' %}
+{% block top_title %}Все категории товаров{% endblock %}
+{% block content %}
+<h1>Все категории товаров</h1>
+    <table class="table table-striped">
+        <tr>
+            <th width="70%">Категория</th><th>Перечень товаров</th>
+        </tr>
+        {% for cat in cats %}
+        <tr>
+            <td>{% if cat.__lvl == 0 %}{{cat.title}}{% elseif cat.__lvl == 1 %}- {{cat.title}}{% elseif cat.__lvl == 2 %}-- {{cat.title}}{% else %}--- {{cat.title}}{% endif %}</td>
+            <td><a class="btn btn-success btn-sm" href="/category/products?id={{cat.Pk}}">Показать</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
