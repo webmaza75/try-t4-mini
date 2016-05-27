@@ -20,7 +20,6 @@ class Product extends Controller
 
         if(!empty($id)) {
             $this->data->product = MProduct::findByPK($id);
-            //var_dump($this->data->product); die;
         }
 
         if(!empty($product)) {
