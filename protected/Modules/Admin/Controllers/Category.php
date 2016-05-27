@@ -24,7 +24,6 @@ class Category extends Controller
 
         if(!empty($id)) {
             $this->data->category = MCategory::findByPK($id);
-            //var_dump($this->data->category); die;
         }
 
         if(!empty($category)) {
@@ -50,7 +49,6 @@ class Category extends Controller
         $cat = MCategory::findByPK($id);
         if(!empty($cat)) {
             $cat->delete();
-            //$cat->afterDelete();
         }
         $this->redirect('/admin/category');
     }
