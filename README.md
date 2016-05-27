@@ -1,4 +1,6 @@
-Исправления к уроку 4: Создан контроллер App\Controllers\Category (Controllers/Category.php), 
-к нему шаблоны: /Templates/Category/Default.html - вывод всех категорий, 
-/Templates/Category/Products.html - Вывод всех товаров категории с конкретным $id, 
-сгруппированных по подкатегориям.
+Урок 5: 
+1) валидация + санитация данных в моделях protected/Models/Category.php 
+и protected/Models/Product.php;
+2) + паттерн "Мультиисключение" в контроллерах protected/Modules/Admin/Controllers/Category.php 
+и protected/Modules/Admin/Controllers/Product.php Админ-панели
+3) + метод afterDelete() в модели protected/Models/Category.php
