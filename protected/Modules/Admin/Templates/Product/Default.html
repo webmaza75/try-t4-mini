@@ -1,0 +1,19 @@
+{% extends 'Index.html' %}
+{% block top_title %}Товары{% endblock %}
+{% block content %}
+    <a href="/admin/product/edit" class="btn btn-sm btn-success">Добавить</a>
+    <p></p>
+    <table class="table table-striped">
+        <tr>
+            <th width="70%">Товар</th><th>Цена</th><th>Действия</th>
+        </tr>
+        {% for product in products %}
+            <tr>
+                <td><a href="/admin/product/edit?id={{product.pk}}">{{product.title}}</a></td>
+                <td>{{product.price}}</td>
+                <td><a class="btn btn-danger btn-sm" href="/admin/product/delete?id={{product.pk}}">Удалить</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

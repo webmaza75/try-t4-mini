@@ -1,0 +1,36 @@
+{% extends 'Index.html' %}
+{% block top_title %}Добавление продукта{% endblock %}
+{% block content %}
+{% if errors %}
+    {% for error in errors %}
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Ошибка:</strong> {{ error.message }}
+        </div>
+    {% endfor %}
+{% endif %}
+    <form class="form" action="/admin/product/edit" method="post">
+        <label for="title">Введите название продукта</label>
+        <input type="text" id="title" name="product[title]" value="{{product.title}}" required><br>
+        <label for="price">Введите цену (в копейках)</label>
+        <input type="number" id="price" name="product[price]" value="{{product.price}}" required><br>
+        <label for="stock">Наличие на складе</label>
+        <input type="checkbox" id="stock" name="product[stock]" value="{{product.stock}}"><br>
+        <label for="categories">Выберите категорию товара</label>
+        <select id="categories" name="product[category]">
+            {% for cat in cats %}
+                {% if product.__category_id == cat.pk %}
+                    <option value="{{cat.__id}}" selected>{{cat.title}}</option>
+                {% else %}
+                    <option value="{{cat.__id}}">{{cat.title}}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <br>
+        {% if product.pk %}
+        <input type="hidden" name="product[id]" value="{{product.pk}}">
+        {% endif %}
+        <input class="btn btn-sm btn-success" type="submit" value="Сохранить">
+    </form>
+<a href="/admin/product">К категориям</a>
+{% endblock %}

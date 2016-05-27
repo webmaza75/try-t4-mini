@@ -1,7 +1,7 @@
 {% extends 'Index.html' %}
 {% block top_title %}Категории{% endblock %}
 {% block content %}
-    <a href="/admin/category/add" class="btn btn-sm btn-success">Добавить</a>
+    <a href="/admin/category/edit" class="btn btn-sm btn-success">Добавить</a>
     <p></p>
     <table class="table table-striped">
         <tr>
@@ -9,7 +9,7 @@
         </tr>
         {% for cat in cats %}
             <tr>
-                <td>{% if cat.__lvl == 0 %}{{cat.title}}{% elseif cat.__lvl == 1 %}- {{cat.title}}{% elseif cat.__lvl == 2 %}-- {{cat.title}}{% else %}--- {{cat.title}}{% endif %}</td>
+                <td><a href="/admin/category/edit?id={{cat.Pk}}">{% if cat.__lvl == 0 %}{{cat.title}}{% elseif cat.__lvl == 1 %}- {{cat.title}}{% elseif cat.__lvl == 2 %}-- {{cat.title}}{% else %}--- {{cat.title}}{% endif %}</a></td>
                 <td><a class="btn btn-danger btn-sm" href="/admin/category/delete?id={{cat.Pk}}">Удалить</a></td>
                 <td><a class="btn btn-primary btn-sm" href="/admin/category/up?id={{cat.Pk}}">Вверх</a></td>
                 <td><a class="btn btn-primary btn-sm" href="/admin/category/down?id={{cat.Pk}}">Вниз</a></td>

@@ -3,7 +3,9 @@
 namespace App\Modules\Admin\Controllers;
 
 use T4\Mvc\Controller;
+use T4\Core\MultiException;
 use App\Models\Category as MCategory;
+//use T4\Orm\Extensions;
 
 /**
  * Class Category - категории товаров
@@ -16,17 +18,31 @@ class Category extends Controller
         $this->data->cats = MCategory::findAllTree();
     }
 
-    public function actionAdd()
+    public function actionEdit($id = null, $category = null)
     {
         $this->data->cats = MCategory::findAllTree();
-    }
 
-    public function actionSave($category)
-    {
-        $cat1 = new MCategory();
-        $cat1->fill($category);
-        $cat1->save();
-        $this->redirect('/admin/category');
+        if(!empty($id)) {
+            $this->data->category = MCategory::findByPK($id);
+            //var_dump($this->data->category); die;
+        }
+
+        if(!empty($category)) {
+            try {
+                if (!$category['id']) {
+                    $cat1 = new MCategory();
+                } else {
+                    $cat1 = MCategory::findByPK($category['id']);
+                }
+
+                $cat1->fill($category);
+                $cat1->save();
+                $this->redirect('/admin/category');
+            } catch (MultiException $e) {
+                $this->data->errors = $e;
+                $this->data->category = $category;
+            }
+        }
     }
 
     public function actionDelete($id)
@@ -34,6 +50,7 @@ class Category extends Controller
         $cat = MCategory::findByPK($id);
         if(!empty($cat)) {
             $cat->delete();
+            //$cat->afterDelete();
         }
         $this->redirect('/admin/category');
     }
