@@ -4,7 +4,6 @@ namespace App\Models;
 
 use T4\Orm\Model;
 use T4\Core\Exception;
-use T4\Orm\Extension;
 
 /**
  * Class Category схема для таблицы категорий (categories)
